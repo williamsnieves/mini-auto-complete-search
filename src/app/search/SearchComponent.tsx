@@ -10,7 +10,6 @@ export default function SearchComponent() {
 
   const handleResultClick = (result: SearchResult) => {
     console.log("Selected result:", result);
-    // Implementa la lógica que necesites cuando se selecciona un resultado
   };
 
   return (

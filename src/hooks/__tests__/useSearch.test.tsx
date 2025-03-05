@@ -2,14 +2,12 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useSearch } from "../useSearch";
 
-// Mock state que podemos manipular en los tests
 const mockState = {
   query: "",
   results: [],
   isLoading: false,
 };
 
-// Mock de Zustand
 vi.mock("@/store/useStore", () => ({
   useSearchStore: vi.fn().mockImplementation(() => ({
     ...mockState,
@@ -25,7 +23,6 @@ vi.mock("@/store/useStore", () => ({
   })),
 }));
 
-// Mock de Algolia
 vi.mock("@/lib/algolia", () => ({
   searchIndex: {
     search: vi
@@ -36,7 +33,6 @@ vi.mock("@/lib/algolia", () => ({
 
 describe("useSearch", () => {
   beforeEach(() => {
-    // Resetear el estado antes de cada test
     mockState.query = "";
     mockState.results = [];
     mockState.isLoading = false;
@@ -54,7 +50,6 @@ describe("useSearch", () => {
 
     await act(async () => {
       result.current.setQuery("test");
-      // Esperar a que el debounce se complete
       await new Promise((r) => setTimeout(r, 300));
     });
 
